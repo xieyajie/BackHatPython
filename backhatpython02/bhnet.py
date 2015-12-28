@@ -21,6 +21,7 @@ def run_command(cmd):
     cmd = cmd.rstrip()
 
     try:
+        # subprocess 提供了进程创建接口
         # subprocess.check_output() 父进程等待子进程完成, 返回子进程向标准输出的输出结果
         # 函数中多个参数都有默认值,如果想中间几个用默认值,后边的自赋值,需要"参数名=自定义值"
         output = subprocess.check_output(cmd, stderr=subprocess.STDOUT, shell=True)
@@ -69,9 +70,16 @@ def client_handler(client_socket):
             cmd_buffer = ""
             while "\n" not in cmd_buffer:
                 cmd_buffer += client_socket.recv(1024).decode()
+                if not len(cmd_buffer):
+                    break
+
+            if not len(cmd_buffer):
+                break
 
             response = run_command(cmd_buffer)
-            client_socket.send(response.encode())
+            if not isinstance(response, bytes):
+                response = response.encode()
+            client_socket.send(response)
 
 
 def server_loop():
@@ -117,10 +125,10 @@ def client_sender(buffer):
 
             print(response, end=' ')
 
-            buffer = input("")
-            buffer += "\n"
+            send_data = input("")
+            send_data += "\n"
 
-            client.send(buffer.encode())
+            client.send(send_data.encode())
     except:
         print("[*] Exceptions! Exiting.")
 
@@ -194,6 +202,7 @@ def main():
     if not listen and len(target) and port > 0:
         # buffer = sys.stdin.read()
         buffer = input("输入内容:")
+        buffer += '\n'
         client_sender(buffer)
 
     if listen:
