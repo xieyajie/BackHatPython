@@ -27,7 +27,7 @@ def receive_from(connection):
 
     try:
         while True:
-            data = connection.recv(4096)
+            data = connection.recv(4096).decode()
 
             if not data:
                 break
