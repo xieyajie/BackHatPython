@@ -64,13 +64,14 @@ def client_handler(client_socket):
     if command:
 
         while True:
-            client_socket.send("<BHP:#>")
+            send_data = "<BHP:#>"
+            client_socket.send(send_data.encode())
             cmd_buffer = ""
             while "\n" not in cmd_buffer:
-                cmd_buffer += client_socket.recv(1024)
+                cmd_buffer += client_socket.recv(1024).decode()
 
             response = run_command(cmd_buffer)
-            client_socket.send(response)
+            client_socket.send(response.encode())
 
 
 def server_loop():
@@ -100,15 +101,14 @@ def client_sender(buffer):
         client.connect((target, port))
 
         if len(buffer):
-            client.send(buffer)
+            client.send(buffer.encode())
 
         while True:
-
             recv_len = 1
             response = ""
 
             while recv_len:
-                data = client.recv(4096)
+                data = client.recv(4096).decode()
                 recv_len = len(data)
                 response += data
 
@@ -120,7 +120,7 @@ def client_sender(buffer):
             buffer = input("")
             buffer += "\n"
 
-            client.send(buffer)
+            client.send(buffer.encode())
     except:
         print("[*] Exceptions! Exiting.")
 
@@ -159,7 +159,7 @@ def main():
     # if not len(sys.argv[1:]):
     #     usage()
 
-    argvs = input()
+    argvs = input("输入命令:")
 
     try:
         # getopt.getopt()返回两个值，
@@ -192,7 +192,8 @@ def main():
             assert False, "Unhandled Option"
 
     if not listen and len(target) and port > 0:
-        buffer = sys.stdin.read()
+        # buffer = sys.stdin.read()
+        buffer = input("输入内容:")
         client_sender(buffer)
 
     if listen:
