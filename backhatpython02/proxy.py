@@ -40,11 +40,11 @@ def receive_from(connection):
 
 
 def request_handler(buffer):
-    return buffer
+    return buffer.decode()
 
 
 def response_handler(buffer):
-    return buffer
+    return buffer.decode()
 
 
 def proxy_handler(client_socket, remote_host, remote_port, receive_first):
@@ -115,8 +115,9 @@ def server_loop(local_host, local_port, remote_host, remote_ip, receive_first):
 
 
 def main():
-    # info = input()
-    info_input = sys.argv[1:]
+    cmd_input = input("输入命令:")
+    info_input = cmd_input.split()
+    # info_input = sys.argv[1:]
     if len(info_input) != 5:
         print("Usage: ./proxy.py [localhost] [localport] [remotehost] [remoteport] [receive_first]")
         print("Example: ./proxy.py 127.0.0.1 9000 10.12.132.1 90000 True")
