@@ -11,5 +11,3 @@ if connection:
 
     send_data = "Server ACK -> " + recv_data
     connection.send(send_data.encode())
-
-
