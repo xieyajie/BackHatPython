@@ -65,8 +65,6 @@ class IP(Structure):
         # socket.inet_ntoa: 将32位形式的IP地址转换成字符串形式的IP地址,非线程安全
         self.src_address = socket.inet_ntoa(struct.pack("@I", self.src))
         self.dst_address = socket.inet_ntoa(struct.pack("@I", self.dst))
-        # self.src_address = self.src
-        # self.dst_address = self.dst
 
         try:
             self.protocol = self.protocol_map[self.protocol_num]
