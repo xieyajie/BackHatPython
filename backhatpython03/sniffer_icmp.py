@@ -72,7 +72,7 @@ sniffer.bind((host, 0))
 sniffer.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
 
 if os.name == "nt":
-    sn.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
+    sniffer.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
 
 try:
     while True:
