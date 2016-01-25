@@ -6,7 +6,7 @@ import struct
 import threading
 from ctypes import *
 
-host = "127.0.0.1"
+host = "192.168.1.8"
 
 
 class IP(Structure):

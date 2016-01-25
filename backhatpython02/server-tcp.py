@@ -1,8 +1,8 @@
 import socket
 import threading
 
-bind_ip = "127.0.0.1"
-bind_port = 50007
+bind_ip = ""
+bind_port = 60007
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((bind_ip, bind_port))

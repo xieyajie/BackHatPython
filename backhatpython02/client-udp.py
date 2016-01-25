@@ -1,6 +1,6 @@
 import socket
 
-address = ('127.0.0.1', 50007)
+address = ('192.168.0.143', 65212)
 
 # SOCK_DGRAM 使用UDP, 不保持长连接
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

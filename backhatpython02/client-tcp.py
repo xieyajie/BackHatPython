@@ -2,7 +2,7 @@ import socket
 import json
 
 target_host = "127.0.0.1"
-target_port = 50007
+target_port = 60007
 
 # AF_INET 将使用标准的IPv4地址或者主机名
 # SOCK_STREAM 使用TCP

@@ -1,6 +1,6 @@
 import socket
 
-address = ('127.0.0.1', 50007)
+address = ('192.168.1.8', 0)
 socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 socket.bind(address)
 
